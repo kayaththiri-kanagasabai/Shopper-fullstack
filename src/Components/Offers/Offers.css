@@ -1,12 +1,13 @@
 .offers{
     width: 65%;
-    height: 60vh;
+    height: 100vh;
     display: flex;
     margin: auto;
     padding: 0 140px;
     background: linear-gradient(180deg, #fde1ff 0%, #e1ffea22 60%);
 }
 .offers-left{
+    
     display: flex;
     flex: 1;
     flex-direction: column;

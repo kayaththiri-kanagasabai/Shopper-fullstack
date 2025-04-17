@@ -6,7 +6,8 @@ import Shop from "./Pages/Shop";
 import LogiSignup from "./Pages/LogiSignup";
 import Product from "./Pages/Product";
 import Navbar from "./Components/Navbar/Navbar";
-import Items from "./Components/Item/Item";
+import Footer from "./Components/Footer/Footer";
+
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<LogiSignup />} />
         </Routes>
       </BrowserRouter>
+      <Footer/>
     </div>
   );
 }

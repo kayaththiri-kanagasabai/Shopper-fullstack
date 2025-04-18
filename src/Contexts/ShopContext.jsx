@@ -17,7 +17,7 @@ return(
     </ShopContext.Provider>
     
 
-)
+)                   
 
 }
 export default ShopContextProvider;

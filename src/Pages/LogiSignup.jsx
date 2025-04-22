@@ -1,8 +1,26 @@
 import React from 'react'
 
+
+
 const LogiSignup = () => {
   return (
-    <div>LogiSignup</div>
+    <div className='LogiSignup'>
+      <div className="loginsignup-container">
+        <h1>Sign Up</h1>
+        <div className="loginsignup-fields">
+          <input type="text" placeholder='Your Name' />
+          <input type="email" placeholder='Email Address' />
+          <input type="password" placeholder='Password' />
+        </div>
+        <button>Continue</button>
+        <p className="loginsignup-agree">Allready have an account? <span>Login Here</span></p>
+        <div className="loginsignup-agree">
+          <input type="checkbox" name=''id='' />
+          <p>By continuing, i agree to the terms of use & privacy policy.</p>
+        </div>
+      </div>
+
+    </div>
   )
 }
 

@@ -6,7 +6,7 @@
     width: 82%;
 }
 /*To Showing 1-12 out of 36 products*/
-.shopcategory-indexsort{
+.shopcategory-indexSort{
     display: flex;
     margin: 0px 170px;
     justify-content: space-between;
@@ -19,7 +19,7 @@
     border: 1px solid #888;
 }
 /* To Showing 1-12 */
-.shopcategory-indexsort p span{
+.shopcategory-indexSort p span{
     font-weight: 600;
 }
 /* To products,items */

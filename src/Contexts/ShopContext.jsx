@@ -1,23 +1,58 @@
-import React,{createContext} from "react";
-import all_product from "../Components/Assets/all_product"
+import React,{createContext, useEffect, useState} from "react";
 
 // created ShopContext using createContext
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
     let cart = {};
-    for (let index = 1; index < all_product.length+1; index++) {
+    for (let index = 1; index < 300+1; index++) {
         cart[index] = 0;
     }
     return cart;
 }
 // cerated one function called ShopContextProvider,pass the props
 const ShopContextProvider = (props) => {
-    const [cartItems, setCartItems] = React.useState(getDefaultCart()); // created a state called cartItems and set the default value to getDefaultCart function
+    const[all_product,setAll_Product] =useState([]);
 
+    const [cartItems, setCartItems] = React.useState(getDefaultCart()); // created a state called cartItems and set the default value to getDefaultCart function
+  
+    useEffect(() => {
+    fetch("https://localhost:40000/all_product")
+    .then((respose) => respose.json())
+    .then((data) => setAll_Product(data)) 
+if(localStorage.getItem("auth_token")){
+    fetch("https://localhost:40000/getcart",{
+        method:"POST",
+        headers:{
+            Accept:"application/formData",
+            'auth-token' : `${localStorage.getItem('auth_token')}`,
+            'Content-Type': 'application/json'
+        },
+        body:"",
+    })
+    .then((response) => response.json())
+    .then((data) =>setCartItems(data));
+
+
+}
+    },[])
 
 const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 })) // when the addToCart function is called, it will update the cartItems state by adding 1 to the itemId
+}
+if(localStorage.getItem("auth_token")){
+    fetch("https://localhost:40000/addtocart",{
+        method:"POST",
+        headers:{
+            Accept:"application/json",
+            'auth-token' : `${localStorage.getItem('auth_token')}`,
+            'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({"ItemId":itemId}),
+})
+.then((response) => response.json())
+.then((data) => console.log(data)) 
+
 }
 
 
@@ -54,6 +89,18 @@ const getTotalCartItems =()=>{
 
 const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 })) // when the addToCart function is called, it will update the cartItems state by adding 1 to the itemId
+    if(localStorage.getItem("auth_token")){
+        fetch("https://localhost:40000/removefromcart",{
+            method:"POST",
+            headers:{
+                Accept:"application/json",
+                'auth-token' : `${localStorage.getItem('auth_token')}`,
+                'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({"ItemId":itemId}),
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data)) 
 }
 
 const contextValue ={getTotalCartItems,getTotalCartAmount,all_product,cartItems,removeFromCart}; // created a contextValue variable and assigned all_product to it(all_product file is where the data and function are prebuild to use )
@@ -66,5 +113,5 @@ return(
 
 )                   
 
-}
+}}
 export default ShopContextProvider;
